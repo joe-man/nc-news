@@ -10,6 +10,7 @@ export default function Article() {
   const { article_id } = useParams();
   const [currentArticle, setCurrentArticle] = useState({});
   const [likeError, setLikeError] = useState(false);
+  const [disableButtons, setDisableButtons] = useState(false);
 
   const formattedDate = moment(currentArticle.created_by).format(
     "MMMM DD, YYYY"
@@ -27,6 +28,7 @@ export default function Article() {
       updatedArticle.votes += value;
       return updatedArticle;
     });
+    setDisableButtons(true);
     patchVotesByArticleID(article_id, value).catch(() => {
       setCurrentArticle((prevArticle) => {
         const updatedArticle = { ...prevArticle };
@@ -53,11 +55,11 @@ export default function Article() {
         <div>{currentArticle.topic}</div>
         <div>{currentArticle.body}</div>
         <div className={styles.likesContainer}>
-          <button onClick={() => handleLike(1)}>
+          <button disabled={disableButtons} onClick={() => handleLike(1)}>
             <img src="/thumbsup.png" alt="thumbs up icon" />
           </button>
           <div>{currentArticle.votes} likes</div>
-          <button onClick={() => handleLike(-1)}>
+          <button disabled={disableButtons} onClick={() => handleLike(-1)}>
             <img src="/thumbsdown.png" alt="thumbs down icon" />
           </button>
         </div>
