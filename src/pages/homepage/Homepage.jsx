@@ -58,9 +58,7 @@ export default function Homepage() {
         <div className={styles.dropDownContainer}>
           <h4>Displayings articles:</h4>
           <select onChange={handleFilter} className={styles.dropdown}>
-            <option value="" selected="selected">
-              All
-            </option>
+            <option selected="selected">All</option>
             {topics.map((topic) => (
               <option key={topic.slug}>{topic.slug}</option>
             ))}
