@@ -48,3 +48,15 @@ export function patchVotesByArticleID(article_id, value) {
       return response.data.article;
     });
 }
+
+export function postCommentByArticleID(article_id, comment) {
+  return api
+    .post(`/articles/${article_id}/comments`, comment)
+    .then((response) => {
+      const comment = response.data.comment;
+      return api.get(`/users/${comment.author}`).then((response) => {
+        comment.avatar_url = response.data.user.avatar_url;
+        return comment;
+      });
+    });
+}

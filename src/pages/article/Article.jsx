@@ -4,6 +4,7 @@ import { getArticleByArticleID, patchVotesByArticleID } from "../../utils/api";
 import styles from "./article.module.css";
 import Comments from "../../components/Comment";
 import moment from "moment";
+import Error from "../../components/Error";
 
 export default function Article() {
   const { article_id } = useParams();
@@ -60,13 +61,7 @@ export default function Article() {
             <img src="/thumbsdown.png" alt="thumbs down icon" />
           </button>
         </div>
-        {likeError && (
-          <div className={styles.likeErrorContainer}>
-            <h4>Error</h4>
-            <div>Oops, something went wrong. Please try again later.</div>
-            <button onClick={() => setLikeError(false)}>OK</button>
-          </div>
-        )}
+        {likeError && <Error setError={setLikeError} />}
       </div>
       <Comments article_id={article_id} />
     </div>

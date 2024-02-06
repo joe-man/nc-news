@@ -8,3 +8,7 @@
 button {
   cursor: pointer;
 }
+
+.loading {
+  width: 20px;
+}

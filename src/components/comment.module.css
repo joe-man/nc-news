@@ -27,7 +27,14 @@
   width: 10px;
 }
 
-.imgContainer {
+.inputContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.inputContainer button {
+  border-radius: 30px;
+  padding: 5px 20px;
 }
 
 .imgContainer img {
