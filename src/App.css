@@ -1,0 +1,6 @@
+.routeContainer {
+  padding-top: 70px;
+  display: flex;
+  justify-content: center;
+  max-width: 1366px;
+}
