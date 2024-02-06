@@ -48,19 +48,29 @@ export default function Homepage() {
       <div className={styles.header}>
         <div className={styles.dropDownContainer}>
           <h4>Number of articles:</h4>
-          <select onChange={handleLimit} className={styles.dropdown}>
-            <option>1</option>
-            <option selected="selected">5</option>
-            <option>10</option>
-            <option>20</option>
+          <select
+            defaultValue="5"
+            onChange={handleLimit}
+            className={styles.dropdown}
+          >
+            <option value="1">1</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
           </select>
         </div>
         <div className={styles.dropDownContainer}>
           <h4>Displayings articles:</h4>
-          <select onChange={handleFilter} className={styles.dropdown}>
-            <option selected="selected">All</option>
+          <select
+            defaultValue=""
+            onChange={handleFilter}
+            className={styles.dropdown}
+          >
+            <option value="">All</option>
             {topics.map((topic) => (
-              <option key={topic.slug}>{topic.slug}</option>
+              <option value={topic.slug} key={topic.slug}>
+                {topic.slug}
+              </option>
             ))}
           </select>
         </div>
