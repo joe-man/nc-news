@@ -1,18 +1,56 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "./comment.module.css";
-import { getCommentsByArticleID } from "../utils/api";
+import { getCommentsByArticleID, postCommentByArticleID } from "../utils/api";
 import { UserContext } from "../contexts/UserContext";
 import moment from "moment";
+import Error from "./Error";
 
 export default function Comments({ article_id }) {
   const [comments, setComments] = useState([]);
   const { user } = useContext(UserContext);
+  const [disabled, setDisabled] = useState(true);
+  const [commentBoxText, setCommentBoxText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [postCommentError, setPostCommentError] = useState(false);
 
   useEffect(() => {
     getCommentsByArticleID(article_id).then((response) => {
       setComments(response);
     });
   }, []);
+
+  const handleText = (event) => {
+    setCommentBoxText(event.target.value);
+    if (event.target.value.length > 0) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLoading(true);
+    postCommentByArticleID(article_id, {
+      username: user.username,
+      body: commentBoxText,
+    })
+      .then((response) => {
+        setLoading(false);
+        setCommentBoxText("");
+        setDisabled(true);
+        setComments((prevComments) => {
+          const updatedComments = [...prevComments];
+          updatedComments.unshift(response);
+          return updatedComments;
+        });
+      })
+      .catch((err) => {
+        setLoading(false);
+        setDisabled(true);
+        setPostCommentError(true);
+      });
+  };
 
   return (
     <div className={styles.container}>
@@ -24,9 +62,23 @@ export default function Comments({ article_id }) {
             alt={`Avatar image for username ${user.username}`}
           />
         </div>
-        <div className={styles.inputContainer}>
-          <input type="text" placeholder="Add a comment..." />
-        </div>
+
+        {loading ? (
+          <img className="loading" src="/loading.gif" alt="loading gif" />
+        ) : (
+          <form className={styles.inputContainer}>
+            <input
+              type="text"
+              placeholder="Add a comment..."
+              onChange={handleText}
+              value={commentBoxText}
+            />
+            <button onClick={handleSubmit} disabled={disabled}>
+              submit
+            </button>
+          </form>
+        )}
+        {postCommentError && <Error setError={setPostCommentError} />}
       </div>
       {comments.map((comment) => {
         const formattedDate = moment(comment.created_by).format(
