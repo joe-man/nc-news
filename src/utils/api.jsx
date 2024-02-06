@@ -23,3 +23,24 @@ export function getArticleByArticleID(article_id) {
     return response.data.article;
   });
 }
+
+export function getCommentsByArticleID(article_id) {
+  return api.get(`/articles/${article_id}/comments`).then((response) => {
+    const comments = response.data.comments;
+    const promises = comments.map((comment) => {
+      return api.get(`/users/${comment.author}`).then((response) => {
+        comment.avatar_url = response.data.user.avatar_url;
+        return comment;
+      });
+    });
+    return Promise.all(promises).then((response) => {
+      return response;
+    });
+  });
+}
+
+export function getUserByUsername(username) {
+  return api.get(`/users/${username}`).then((response) => {
+    return response.data.user;
+  });
+}
