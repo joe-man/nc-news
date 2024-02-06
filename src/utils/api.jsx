@@ -60,3 +60,7 @@ export function postCommentByArticleID(article_id, comment) {
       });
     });
 }
+
+export function deleteComment(comment_id) {
+  return api.delete(`/comments/${comment_id}`);
+}

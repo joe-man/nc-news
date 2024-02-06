@@ -1,6 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "./comment.module.css";
-import { getCommentsByArticleID, postCommentByArticleID } from "../utils/api";
+import {
+  deleteComment,
+  getCommentsByArticleID,
+  postCommentByArticleID,
+} from "../utils/api";
 import { UserContext } from "../contexts/UserContext";
 import moment from "moment";
 import Error from "./Error";
@@ -12,6 +16,8 @@ export default function Comments({ article_id }) {
   const [commentBoxText, setCommentBoxText] = useState("");
   const [loading, setLoading] = useState(false);
   const [postCommentError, setPostCommentError] = useState(false);
+  const [disableDelete, setDisableDelete] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     getCommentsByArticleID(article_id).then((response) => {
@@ -52,8 +58,28 @@ export default function Comments({ article_id }) {
       });
   };
 
+  const handleDeleteComment = (event, comment) => {
+    setDisableDelete(true);
+
+    deleteComment(comment.comment_id)
+      .then(() => {
+        setDisableDelete(false);
+        setComments((prevComment) => {
+          const updatedComments = [...prevComment];
+          const index = updatedComments.indexOf(comment);
+          updatedComments.splice(index, 1);
+          return updatedComments;
+        });
+      })
+      .catch((err) => {
+        setDisableDelete(false);
+        setError(true);
+      });
+  };
+
   return (
     <div className={styles.container}>
+      {error && <Error setError={setError} className={styles.error} />}
       <h4>{comments.length} comments</h4>
       <div className={styles.addCommentContainer}>
         <div className={styles.imgContainer}>
@@ -67,7 +93,9 @@ export default function Comments({ article_id }) {
           <img className="loading" src="/loading.gif" alt="loading gif" />
         ) : (
           <form className={styles.inputContainer}>
-            <input
+            <textarea
+              cols="80"
+              rows="2"
               type="text"
               placeholder="Add a comment..."
               onChange={handleText}
@@ -111,6 +139,16 @@ export default function Comments({ article_id }) {
                 </button>
               </div>
             </div>
+            {comment.author === user.username && (
+              <div className={styles.deleteContainer}>
+                <button
+                  disabled={disableDelete}
+                  onClick={() => handleDeleteComment(event, comment)}
+                >
+                  Delete
+                </button>
+              </div>
+            )}
           </div>
         );
       })}
