@@ -22,3 +22,34 @@
 .imgContainer img {
   border-radius: 10px;
 }
+
+.likesContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.likesContainer img {
+  width: 10px;
+}
+
+.likeErrorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background-color: gray;
+  color: white;
+  font-size: 12px;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.likeErrorContainer button {
+  height: 30px;
+  width: 100px;
+  background-color: rgb(0, 187, 255);
+  color: white;
+  border-radius: 20px;
+  border: none;
+}

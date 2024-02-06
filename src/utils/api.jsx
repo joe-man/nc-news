@@ -39,8 +39,12 @@ export function getCommentsByArticleID(article_id) {
   });
 }
 
-export function getUserByUsername(username) {
-  return api.get(`/users/${username}`).then((response) => {
-    return response.data.user;
-  });
+export function patchVotesByArticleID(article_id, value) {
+  return api
+    .patch(`/articles/${article_id}`, {
+      inc_votes: value,
+    })
+    .then((response) => {
+      return response.data.article;
+    });
 }
