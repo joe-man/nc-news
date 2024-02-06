@@ -1,0 +1,53 @@
+.singleCommentContainer {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 10px;
+}
+
+.addCommentContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.likesContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.likesContainer img {
+  width: 10px;
+}
+
+.imgContainer {
+}
+
+.imgContainer img {
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50px;
+}
+
+.authorText {
+  font-weight: bold;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.date {
+  font-size: 11px;
+  color: gray;
+}
