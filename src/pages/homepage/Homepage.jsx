@@ -2,23 +2,26 @@ import { useEffect, useState } from "react";
 import { getArticles, getTopics } from "../../utils/api";
 import styles from "./homepage.module.css";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Homepage() {
   const [articles, setArticles] = useState([]);
   const [topics, setTopics] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [limitNumber, setLimitNumber] = useState(5);
-  const [activeFilter, setActiveFilter] = useState("");
+  const navigate = useNavigate();
+
+  const { topic } = useParams();
 
   useEffect(() => {
-    getArticles(limitNumber, pageNumber, activeFilter).then((response) => {
+    getArticles(limitNumber, pageNumber, topic).then((response) => {
       setArticles(response);
     });
     getTopics().then((response) => {
       setTopics(response);
     });
-  }, [pageNumber, limitNumber, activeFilter]);
+  }, [pageNumber, limitNumber, topic]);
 
   const handlePageClick = (event) => {
     event.preventDefault();
@@ -31,15 +34,13 @@ export default function Homepage() {
 
   const handleFilter = (event) => {
     event.preventDefault();
-    setActiveFilter(event.target.value);
+    navigate(`/articles/${event.target.value}`);
   };
 
   const handleLimit = (event) => {
     event.preventDefault();
     setLimitNumber(event.target.value);
   };
-
-  const handleArticle = () => {};
 
   return (
     <div className={styles.container}>
