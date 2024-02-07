@@ -4,9 +4,17 @@ const api = axios.create({
   baseURL: "https://project-nc-news-w769.onrender.com/api",
 });
 
-export function getArticles(limit = 10, page = 1, topic = "") {
+export function getArticles(limit = 10, page = 1, topic = "", sort_by, order_by) {
   return api
-    .get(`/articles?limit=${limit}&p=${page}&topic=${topic}`)
+    .get(`/articles`, {
+      params: {
+        limit: limit,
+        p: page,
+        topic: topic,
+        sort_by: sort_by,
+        order: order_by,
+      },
+    })
     .then((response) => {
       return response.data.articles;
     });
@@ -50,15 +58,13 @@ export function patchVotesByArticleID(article_id, value) {
 }
 
 export function postCommentByArticleID(article_id, comment) {
-  return api
-    .post(`/articles/${article_id}/comments`, comment)
-    .then((response) => {
-      const comment = response.data.comment;
-      return api.get(`/users/${comment.author}`).then((response) => {
-        comment.avatar_url = response.data.user.avatar_url;
-        return comment;
-      });
+  return api.post(`/articles/${article_id}/comments`, comment).then((response) => {
+    const comment = response.data.comment;
+    return api.get(`/users/${comment.author}`).then((response) => {
+      comment.avatar_url = response.data.user.avatar_url;
+      return comment;
     });
+  });
 }
 
 export function deleteComment(comment_id) {
