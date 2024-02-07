@@ -16,9 +16,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
           <Route path="/articles" element={<Homepage />}></Route>
+          <Route path="/articles" element={<Homepage />}></Route>
           <Route path="/articles/:topic" element={<Homepage />}></Route>
+          <Route path="/articles/article/:article_id" element={<Article />}></Route>
           <Route path="/about" element={<About />}></Route>
-          <Route path="/article/:article_id" element={<Article />}></Route>
           <Route path="/create_user" element={<CreateUser />}></Route>
           <Route path="/login" element={<Login />}></Route>
         </Routes>
