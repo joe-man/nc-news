@@ -8,9 +8,19 @@ Here is a link to the production [website](https://nioenews.netlify.app/)
 
 Here is a link to the [API](https://project-nc-news-w769.onrender.com/api/)
 
+## Prerequistes
+
+You will need Node to run this locally.
+
+Node Minimum version required: v21.1.0 To check your current version: node --version
+
 ## Getting Started
 
 1. Clone the repository
+
+```bash
+git clone https://github.com/joe-man/nc-news.git
+```
 
 2. Run commands
 
