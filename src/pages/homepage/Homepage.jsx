@@ -46,17 +46,18 @@ export default function Homepage() {
   useEffect(() => {
     setLoading(true);
     setNotFound(false);
-    getArticles(limitNumber, pageNumber, topic, sortByQuery, orderByQuery)
-      .then((response) => {
-        setArticles(response);
-      })
-      .catch((err) => {
-        setNotFound(true);
-      });
     getTopics().then((response) => {
       setTopics(response);
     });
-    setLoading(false);
+    getArticles(limitNumber, pageNumber, topic, sortByQuery, orderByQuery)
+      .then((response) => {
+        setArticles(response);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setNotFound(true);
+        setLoading(false);
+      });
   }, [pageNumber, limitNumber, topic, searchParams]);
 
   const handlePageClick = (event) => {

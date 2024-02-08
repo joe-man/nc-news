@@ -16,9 +16,6 @@
   gap: 10px;
 }
 
-.commentsContainer {
-}
-
 .imgContainer img {
   border-radius: 10px;
 }
@@ -30,4 +27,27 @@
 
 .likesContainer img {
   width: 10px;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    width: 768px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 420px;
+    margin: 20px;
+  }
+  .imgContainer img {
+    width: 300px;
+  }
+  .likesContainer img {
+    width: 30px;
+  }
+  .likesContainer {
+    display: flex;
+    align-items: center;
+  }
 }

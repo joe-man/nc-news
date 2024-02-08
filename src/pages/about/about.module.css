@@ -1,0 +1,14 @@
+.container {
+  margin: 30px;
+}
+
+.bodyContainer {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+
+.bodyContainer img {
+  width: 500px;
+  border-radius: 10px;
+}

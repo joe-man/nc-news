@@ -1,3 +1,6 @@
+.container {
+}
+
 .singleCommentContainer {
   display: flex;
   gap: 20px;
@@ -31,11 +34,16 @@
 .inputContainer {
   display: flex;
   gap: 10px;
+  width: 80%;
 }
 
 .inputContainer button {
   border-radius: 30px;
   padding: 5px 20px;
+}
+
+.inputContainer textarea {
+  width: 100%;
 }
 
 .imgContainer img {

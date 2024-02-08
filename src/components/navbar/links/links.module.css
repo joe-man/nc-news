@@ -1,4 +1,61 @@
 .container {
   display: flex;
+  justify-content: end;
+  width: 100%;
+}
+
+.linkContainer {
+  display: flex;
   gap: 20px;
+}
+
+.menuButton,
+.menuList {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .linkContainer {
+    display: none;
+  }
+  .menuButton {
+    display: flex;
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+  .menuButton img {
+    width: 20px;
+  }
+  .closeButton img {
+    width: 20px;
+  }
+  .menuList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+  }
+  .menuContainer {
+    border-left: 2px solid gray;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100vh;
+    align-items: start;
+    justify-content: start;
+    gap: 10px;
+    padding: 5px;
+  }
+  .closeButton {
+    padding-bottom: 30px;
+  }
 }

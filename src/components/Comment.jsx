@@ -1,10 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "./comment.module.css";
-import {
-  deleteComment,
-  getCommentsByArticleID,
-  postCommentByArticleID,
-} from "../utils/api";
+import { deleteComment, getCommentsByArticleID, postCommentByArticleID } from "../utils/api";
 import { UserContext } from "../contexts/UserContext";
 import moment from "moment";
 import Error from "./Error";
@@ -83,24 +79,14 @@ export default function Comments({ article_id }) {
       <h4>{comments.length} comments</h4>
       <div className={styles.addCommentContainer}>
         <div className={styles.imgContainer}>
-          <img
-            src={user.avatar_url}
-            alt={`Avatar image for username ${user.username}`}
-          />
+          <img src={user.avatar_url} alt={`Avatar image for username ${user.username}`} />
         </div>
 
         {loading ? (
           <img className="loading" src="/loading.gif" alt="loading gif" />
         ) : (
           <form className={styles.inputContainer}>
-            <textarea
-              cols="80"
-              rows="2"
-              type="text"
-              placeholder="Add a comment..."
-              onChange={handleText}
-              value={commentBoxText}
-            />
+            <textarea type="text" placeholder="Add a comment..." onChange={handleText} value={commentBoxText} />
             <button onClick={handleSubmit} disabled={disabled}>
               submit
             </button>
@@ -109,19 +95,11 @@ export default function Comments({ article_id }) {
         {postCommentError && <Error setError={setPostCommentError} />}
       </div>
       {comments.map((comment) => {
-        const formattedDate = moment(comment.created_by).format(
-          "MMMM DD, YYYY"
-        );
+        const formattedDate = moment(comment.created_by).format("MMMM DD, YYYY");
         return (
-          <div
-            className={styles.singleCommentContainer}
-            key={comment.comment_id}
-          >
+          <div className={styles.singleCommentContainer} key={comment.comment_id}>
             <div className={styles.imgContainer}>
-              <img
-                src={comment.avatar_url}
-                alt={`Avatar for username ${comment.author}`}
-              />
+              <img src={comment.avatar_url} alt={`Avatar for username ${comment.author}`} />
             </div>
             <div className={styles.textContainer}>
               <div className={styles.commentHeader}>
@@ -141,10 +119,7 @@ export default function Comments({ article_id }) {
             </div>
             {comment.author === user.username && (
               <div className={styles.deleteContainer}>
-                <button
-                  disabled={disableDelete}
-                  onClick={() => handleDeleteComment(event, comment)}
-                >
+                <button disabled={disableDelete} onClick={() => handleDeleteComment(event, comment)}>
                   Delete
                 </button>
               </div>
