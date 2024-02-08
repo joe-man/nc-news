@@ -38,6 +38,7 @@ export default function Article() {
     setDisableButtons(true);
     patchVotesByArticleID(article_id, value).catch(() => {
       setCurrentArticle((prevArticle) => {
+        setDisableButtons(false);
         const updatedArticle = { ...prevArticle };
         updatedArticle.votes -= value;
         return updatedArticle;
