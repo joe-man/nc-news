@@ -95,12 +95,14 @@ export default function Homepage() {
       <div className={styles.header}>
         <div className={styles.dropDownContainer}>
           <h4>Number of articles:</h4>
-          <select defaultValue="5" onChange={handleLimit} className={styles.dropdown}>
-            <option value="1">1</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-          </select>
+          <form action="">
+            <select defaultValue="5" onChange={handleLimit} className={styles.dropdown}>
+              <option value="1">1</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+            </select>
+          </form>
         </div>
         <div className={styles.dropDownContainer}>
           <h4>Displayings articles:</h4>
