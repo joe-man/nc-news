@@ -9,3 +9,23 @@
   width: 100%;
   background-color: white;
 }
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.imgContainer {
+  width: 70px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.imgContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

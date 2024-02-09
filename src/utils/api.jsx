@@ -70,3 +70,15 @@ export function postCommentByArticleID(article_id, comment) {
 export function deleteComment(comment_id) {
   return api.delete(`/comments/${comment_id}`);
 }
+
+export function getUsers() {
+  return api.get(`/users`).then((response) => {
+    return response.data.users;
+  });
+}
+
+export function getUserByUsername(username) {
+  return api.get(`/users/${username}`).then((response) => {
+    return response.data.user;
+  });
+}

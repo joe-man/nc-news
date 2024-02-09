@@ -14,6 +14,13 @@
   display: none;
 }
 
+.link {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 @media (max-width: 768px) {
   .linkContainer {
     display: none;
